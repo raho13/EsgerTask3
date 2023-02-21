@@ -1,0 +1,19 @@
+<template name="home">
+
+    <div class="toast mt-2" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-body">
+           <h6>
+            element səbətə əlavə olundu
+           </h6> 
+        </div>
+    </div>
+    <div class="container">
+        <div class="card-group mt-5">
+            {{#each data in showProduct}}
+            {{>product data=data}}
+            {{/each}}
+        </div>
+    </div>
+
+
+</template>

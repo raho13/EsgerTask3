@@ -1,0 +1,48 @@
+<template name="addproduct">
+    <div class="container mt-5">
+        <form id="addProductForm" class="bg-light sticky-top">
+
+            <div class="form-group mt-5">
+                <input type="text" class="form-control" id="inputTitle" placeholder="Title">
+            </div>
+
+            <div class="form-group mt-3">
+                <input type="number" class="form-control" id="inputPrice" placeholder="Price">
+            </div>
+
+            <div class="form-group mt-3">
+                <textarea class="form-control" id="inputDescription" placeholder="Description" rows="2"></textarea>
+            </div>
+            
+            {{#if editMode}}
+            {{#if showStatus}}
+            <div class="form-check form-switch mt-3">
+                <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" checked>
+                <label class="form-check-label" for="flexSwitchCheckChecked">Status</label>
+            </div>
+            {{else}}
+            <div class="form-check form-switch mt-3">
+                <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked">
+                <label class="form-check-label" for="flexSwitchCheckChecked">Status</label>
+            </div>
+            {{/if}}
+            {{/if}}
+
+            {{#if editMode}}
+            <button type="button" class="btn mt-3 btn-primary" id="editProduct">Edit post</button>
+            <button type="button" class="btn mt-3 btn-danger">Cancel</button>
+            {{else}}
+            <button type="submit" class="btn mt-3 btn-primary">Post</button>
+            {{/if}}
+
+        </form>
+        <div class="card-group mt-5">
+            {{#each item in showProduct}}
+            {{>product isEditable=true data=item}}
+            {{/each}}
+        </div>
+        <ul id="pagination-demo" class="pagination-md mb-3"></ul>
+    </div>
+
+   
+</template>

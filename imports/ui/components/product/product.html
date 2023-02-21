@@ -1,0 +1,31 @@
+<template name="product">
+    <div class="card mb-4" style="min-Width: 15rem;max-Width: 18rem;">
+        {{# if isBucket}}
+        <div class="card-header">
+            <a class="btn btn-primary add-btn">+</a>
+            {{CountProduct}}
+            <a class="btn btn-primary remove-btn">-</a>
+        </div>
+        {{/if}}
+        <div class="card-body">
+            <h5 class="card-title">{{data.title}}</h5>
+            <p class="card-text">{{data.description}}</p>
+            {{# if isBucket}}
+            <a class="btn btn-primary removeFromBucket">Remove from bucket</a>
+            {{else if isEditable}}
+            <a class="btn btn-primary editProduct">Edit product</a>
+            {{else}}
+            <a class="btn btn-primary addToBucket">Add to bucket</a>
+            {{/if}}
+        </div>
+        <div class="card-footer">${{data.price}}
+            {{# if or isBucket isEditable}}
+            {{# if data.status}}
+            <h6>status : Aktiv</h6>
+            {{else}}
+            <h6>status : Deaktiv</h6>
+            {{/if}}
+            {{/if}}
+        </div>
+    </div>
+</template>
