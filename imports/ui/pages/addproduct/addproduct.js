@@ -4,7 +4,7 @@ import 'twbs-pagination';
 
 Template.addproduct.onCreated(function () {
     const self = this
-    self.query = new ReactiveVar({ userId: Meteor.userId()})
+    self.query = new ReactiveVar({ userId: Meteor.userId() })
     self.limit = new ReactiveVar(10)
     self.skip = new ReactiveVar(0)
     self.sort = new ReactiveVar({ createdAt: -1 })
@@ -13,23 +13,17 @@ Template.addproduct.onCreated(function () {
     self.dataCount = new ReactiveVar(0)
     self.autorun(() => {
         this.subscribe('getProducts', self.query.get(), self.limit.get(), self.skip.get(), self.sort.get())
-        this.subscribe('getProductCount')
-
+        this.subscribe('getProductCount', self.query.get())
         self.dataCount.set(productCountCol.find().fetch()[0]?.count)
         Tracker.afterFlush(function () {
-            let visiblePageCount = 1
-            console.log(visiblePageCount)
             $('#pagination-demo').twbsPagination({
-                totalPages: parseInt(self.dataCount.get() / self.limit.get()),
+                totalPages: parseInt(self.dataCount.get() / self.limit.get() + 1),
                 onPageClick: function (event, page) {
                     self.skip.set((page - 1) * 10)
                 }
             });
         })
     });
-
-
-
 })
 
 Template.addproduct.helpers({
@@ -42,6 +36,9 @@ Template.addproduct.helpers({
     },
     showStatus: function () {
         return Template.instance().productData.get().status
+    },
+    test: function (a, b) {
+        console.log(a + b) 
     }
 });
 
